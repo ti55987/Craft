@@ -69,3 +69,20 @@ header {
 .nd {
     display: none;
 }
+
+/* create flex containers for
+        images
+        articles
+*/
+.btf-images {
+    display: flex;
+    flex-direction: row;
+    flex-wrap: wrap;
+    justify-content: space-around;
+    align-items: center;
+}
+
+/* images */
+.btf-images img {
+    margin: 10px;
+}

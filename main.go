@@ -9,7 +9,7 @@ import (
 var tpl *template.Template
 
 func init() {
-	tpl = template.Must(template.ParseGlob("view/*.gohtml"))
+	tpl = template.Must(template.ParseGlob("view/*.html"))
 }
 
 func main() {
@@ -20,7 +20,7 @@ func main() {
 
 // the home page
 func home(w http.ResponseWriter, req *http.Request) {
-	err := tpl.ExecuteTemplate(w, "index.gohtml", nil)
+	err := tpl.ExecuteTemplate(w, "index.html", nil)
 	if err != nil {
 		log.Fatal(err)
 	}
@@ -29,7 +29,7 @@ func home(w http.ResponseWriter, req *http.Request) {
 // the about page
 func about(w http.ResponseWriter, req *http.Request) {
 	//io.WriteString(w, "about")
-	err := tpl.ExecuteTemplate(w, "about.gohtml", nil)
+	err := tpl.ExecuteTemplate(w, "about.html", nil)
 	if err != nil {
 		log.Fatal(err)
 	}
