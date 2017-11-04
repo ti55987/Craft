@@ -14,10 +14,23 @@ func init() {
 
 func main() {
 	http.HandleFunc("/", home)
+	http.HandleFunc("/about", about)
 	log.Fatal(http.ListenAndServe(":8080", nil))
 }
 
 // the home page
 func home(w http.ResponseWriter, req *http.Request) {
-	tpl.ExecuteTemplate(w, "index.gohtml", nil)
+	err := tpl.ExecuteTemplate(w, "index.gohtml", nil)
+	if err != nil {
+		log.Fatal(err)
+	}
+}
+
+// the about page
+func about(w http.ResponseWriter, req *http.Request) {
+	//io.WriteString(w, "about")
+	err := tpl.ExecuteTemplate(w, "about.gohtml", nil)
+	if err != nil {
+		log.Fatal(err)
+	}
 }
