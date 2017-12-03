@@ -33,7 +33,7 @@ var auth string
 var netClient *http.Client
 
 func init() {
-	tpl = template.Must(template.ParseGlob("view/*.html"))
+	tpl = template.Must(template.ParseGlob("view/template/*.html"))
 	config, err := getConf()
 	if err != nil {
 		panic(err)
@@ -72,6 +72,7 @@ func getConf() (*conf, error) {
 func main() {
 	http.HandleFunc("/", home)
 	http.HandleFunc("/about", about)
+	http.HandleFunc("/menu", menu)
 	log.Fatal(http.ListenAndServe(":8080", nil))
 }
 
@@ -87,6 +88,8 @@ func home(w http.ResponseWriter, req *http.Request) {
 		"link2": getImageLink("/Craft/2.jpg"),
 		"link3": getImageLink("/Craft/3.jpg"),
 		"link4": getImageLink("/Craft/4.jpg"),
+		"link5": getImageLink("/Craft/5.jpg"),
+		"link6": getImageLink("/Craft/6.jpg"),
 	}
 	err := tpl.ExecuteTemplate(w, "index.html", varMap)
 	if err != nil {
@@ -98,6 +101,13 @@ func home(w http.ResponseWriter, req *http.Request) {
 func about(w http.ResponseWriter, req *http.Request) {
 	//io.WriteString(w, "about")
 	err := tpl.ExecuteTemplate(w, "about.html", nil)
+	if err != nil {
+		log.Fatal(err)
+	}
+}
+
+func menu(w http.ResponseWriter, req *http.Request) {
+	err := tpl.ExecuteTemplate(w, "menu.html", nil)
 	if err != nil {
 		log.Fatal(err)
 	}
